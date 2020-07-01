@@ -27,17 +27,19 @@ const reverse = function(matrix) {
 
 
 const wordSearch = (letters, word) => {
-  let verticalLetters = letters;
-  let reverseLetters = letters;
-  let verticalReverseLetters = letters;
   if (letters.length === 0) {
     return false;
   }
+  
+  let verticalLetters = letters;
+  let reverseLetters = letters;
+  let verticalReverseLetters = letters;
+
   const horizontalJoin = letters.map(ls => ls.join(''));
   const verticalJoin = transpose(verticalLetters).map(ls => ls.join(''));
   const reverseJoin = reverse(reverseLetters).map(ls => ls.join(''));
-  const verticalReverseJoin = transpose(transpose(reverse(transpose(verticalReverseLetters)))).map(ls => ls.join(''));
-  console.log(verticalReverseJoin);
+  const verticalReverseJoin = reverse((transpose(verticalReverseLetters))).map(ls => ls.join(''));
+  
   for (const l of verticalReverseJoin) {
     if (l.includes(word)) return true;
   }
@@ -52,7 +54,6 @@ const wordSearch = (letters, word) => {
   }
 
   return false;
-  
 };
 
 module.exports = wordSearch;
